@@ -47,3 +47,32 @@ select * from przetwory;
 insert into przetwory values 
 (1,default,1,'bigos',default,1);
 ```
+#4
+```sql
+select * from postac;
+insert into postac values 
+(4,'lukasz','wiking','1700-11-09',323);
+insert into postac values 
+(5,'szymon','wiking','1700-11-09',323);
+insert into postac values 
+(6,'marek','wiking','1700-11-09',323);
+insert into postac values 
+(7,'Adrian','wiking','1700-11-09',323);
+insert into postac values 
+(8,'Thor','wiking','1700-11-09',323);
+create table statek(
+nazwa_statku varchar(50) primary key,
+rodzaj_statku enum ('duży','sredni','maly') DEFAULT NULL,
+data_wodowania date,
+max_ladownosc int check (max_ladownosc > 0)
+);
+show create table postac;
+insert into statek values ('czarnaperla',default,'1700-12-31',57
+);
+insert into statek values ('perlaexport',default,'1767-07-12',57
+);
+alter table postac add column
+funkcja varchar(45);
+select* from postac ;
+UPDATE `infs_kaminskif`.`postac` SET `funkcja` = 'kapitan' WHERE (`id_postaci` = '1');
+```
