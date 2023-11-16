@@ -1,4 +1,4 @@
-,,,sql
+,,,mysql
 #zad1
 use infs_kaminskif;
 select * from postac;
