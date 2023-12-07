@@ -145,3 +145,22 @@ alter table marynarz add column
 (statek varchar(30) null );
 
 alter table postac delete id_postaci='Adrian';
+```
+zad 6
+```sql
+#funkcje argumentujace
+# avg, sum, count , min , max
+#zad 1 pkt 1
+select avg(waga) from kreatwagawagaura;
+use infs_kaminskif;
+select avg(waga) from kreatura
+where rodzaj = 'wiking';
+#lub "napiechote"
+select rodzaj,nazwa, avg(waga), count(waga),
+count(*)
+from kreatura group by rodzaj;
+select 2023 - year(dataUr) as wiek from kreatura;
+select sum(waga) from zasob order by rodzaj;
+select avg(waga) from zasob group by nazwa having sum(ilosc)>=4 and sum(waga*ilosc)>10;
+```
+
