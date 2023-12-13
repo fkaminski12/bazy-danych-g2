@@ -1,9 +1,40 @@
+# Zadania lab04 
+# Zadanie 1
 
-#zad1
 ```sql
-use infs_kaminskif;
-select * from postac;
-select * from walizka;
+Create table postac (
+id_postaci int NOT NULL AUTO_INCREMENT Primary Key,
+nazwa varchar(40),
+rodzaj enum('wiking','ptak','kobieta'),
+data_ur date,
+wiek int unsigned
+)
+;
+```
+```sql
+insert into postac values(default, 'Bjorn','wiking','2000-01-01',300);
+insert into postac values(default, 'Drozd','Ptak','2010-01-01',10);
+insert into postac values(default, 'Tesciowa','kobieta','1000-01-01',2000);
+```
+```sql
+Update postac
+set wiek=88
+where id_postaci=3;
+```
+
+# Zadanie 2
+```sql
+Create table walizka(
+id_walizka int not null AUTO_INCREMENT Primary key,
+pojemnosc int unsigned,
+kolor enum('różowy','czerwony','tęczowy','żółty'),
+id_wlasciciela int,
+Foreign key(id_wlasciciela) references postac(id_postaci) on delete cascade
+)
+;
+```
+#zad3
+```sql
 create table izba(
 adres_budynku varchar(50) not null,
 nazwa_izby varchar(50) not null,
@@ -14,7 +45,7 @@ references postac(id_postaci) on delete set null
 );
 ```
 #on delete lub on update -> restrict|set null|cascade
-#zad2
+#zad4
 ```sql
 drop table izba;
 select * from izba;
@@ -22,7 +53,6 @@ alter table izba add column
 kolor varchar(30) default 'czarny'
 after metraz;
 describe izba;
-#zad3
 insert into izba values 
 ('tramwaje 997','spizarnia',10,default,1);
 select * from izba;
@@ -30,7 +60,7 @@ select * from izba;
 alter table izba add
  primary key (adres_budynku,nazwa_izby);
 ```
-#3
+#zad 5
 ```sql
 create table przetwory(
 id_przeworu int primary key ,
@@ -47,9 +77,8 @@ select * from przetwory;
 insert into przetwory values 
 (1,default,1,'bigos',default,1);
 ```
-#4
+#zad6
 ```sql
-select * from postac;
 insert into postac values 
 (4,'lukasz','wiking','1700-11-09',323);
 insert into postac values 
@@ -73,12 +102,14 @@ insert into statek values ('perlaexport',default,'1767-07-12',57
 );
 alter table postac add column
 funkcja varchar(45);
-select* from postac ;
-UPDATE `infs_kaminskif`.`postac` SET `funkcja` = 'kapitan' WHERE (`id_postaci` = '1');
+update postac set funkcja='kapitan' where id_postaci=1
 ```
-zad 5
+#lab 05
 ```sql
-use infs_kaminskif;
+delete from postac
+where nazwa<>'Bjorn'
+and rodzaj='wiking'
+order by data_ur asc limit 2;
 alter table postac change
 id_postaci int;
 alter table postac change
@@ -145,22 +176,71 @@ alter table marynarz add column
 (statek varchar(30) null );
 
 alter table postac delete id_postaci='Adrian';
-```
-zad 6
-```sql
 #funkcje argumentujace
 # avg, sum, count , min , max
 #zad 1 pkt 1
-select avg(waga) from kreatwagawagaura;
-use infs_kaminskif;
-select avg(waga) from kreatura
-where rodzaj = 'wiking';
-#lub "napiechote"
-select rodzaj,nazwa, avg(waga), count(waga),
-count(*)
-from kreatura group by rodzaj;
-select 2023 - year(dataUr) as wiek from kreatura;
-select sum(waga) from zasob order by rodzaj;
-select avg(waga) from zasob group by nazwa having sum(ilosc)>=4 and sum(waga*ilosc)>10;
+
 ```
+#lab6
+```sql
+create table infs_kaminskif.kreatura as select * from kreatura;
+create table infs_kaminskif.zasob as select * from zasob;
+create table infs_kaminskif.ekwipunek as select * from ekwipunek;
+```
+```sql
+select * from zasob;
+```
+```sql
+select * from zasob where rodzaj='jedzenie';
+```
+```sql
+select idZasobu,ilosc from ekwipunek where idkreatury in (1,3,5)
+```
+
+# Zadanie 2
+```sql
+select * from kreatura where udzwig>=50 and not rodzaj='wiedzma' or rodzaj is null and udzwig>=50; 
+```
+```sql
+select * from zasob where waga between 2 and 5;
+```
+```sql
+select * from kreatura where nazwa like '%or%' and udzwig between 30 and 70;
+```
+
+# Zadanie 3
+```sql
+select * from zasob where month(dataPozyskania)=7 or month(datapozyskania)=8;
+```
+```sql
+select * from zasob where rodzaj is not null order by waga;
+```
+```sql
+select * from kreatura where dataur is not null order by dataur limit 5;
+```
+
+# Zadanie 4
+```sql
+select distinct rodzaj from zasob;
+
+select rodzaj from zasob group by rodzaj;
+```
+```sql
+select concat(nazwa,'-',rodzaj) from kreatura where rodzaj like 'wi%';
+```
+```sql
+select waga*ilosc as waga from zasob where year(datapozyskania) between 2000 and 20007 ;
+```
+
+# Zadanie 5
+```sql
+select nazwa,waga*0.7 as netto,waga*0.3 as odpadki from zasob where rodzaj='jedzenie';
+```
+```sql
+select * from zasob where rodzaj is null;
+```
+```sql
+select distinct rodzaj from zasob where nazwa like 'Ba%' or '%os' order by rodzaj;
+```
+
 
