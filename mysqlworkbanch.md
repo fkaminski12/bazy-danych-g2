@@ -197,7 +197,7 @@ select * from zasob where rodzaj='jedzenie';
 select idZasobu,ilosc from ekwipunek where idkreatury in (1,3,5)
 ```
 
-# Zadanie 2
+lab 06
 ```sql
 select * from kreatura where udzwig>=50 and not rodzaj='wiedzma' or rodzaj is null and udzwig>=50; 
 ```
@@ -208,7 +208,7 @@ select * from zasob where waga between 2 and 5;
 select * from kreatura where nazwa like '%or%' and udzwig between 30 and 70;
 ```
 
-# Zadanie 3
+
 ```sql
 select * from zasob where month(dataPozyskania)=7 or month(datapozyskania)=8;
 ```
@@ -219,7 +219,7 @@ select * from zasob where rodzaj is not null order by waga;
 select * from kreatura where dataur is not null order by dataur limit 5;
 ```
 
-# Zadanie 4
+
 ```sql
 select distinct rodzaj from zasob;
 
@@ -232,7 +232,7 @@ select concat(nazwa,'-',rodzaj) from kreatura where rodzaj like 'wi%';
 select waga*ilosc as waga from zasob where year(datapozyskania) between 2000 and 20007 ;
 ```
 
-# Zadanie 5
+
 ```sql
 select nazwa,waga*0.7 as netto,waga*0.3 as odpadki from zasob where rodzaj='jedzenie';
 ```
@@ -241,6 +241,68 @@ select * from zasob where rodzaj is null;
 ```
 ```sql
 select distinct rodzaj from zasob where nazwa like 'Ba%' or '%os' order by rodzaj;
+```
+Zadanie 1
+```sql
+#1
+select avg(waga) from kreatura
+where rodzaj='wiking';
+```
+```sql
+#2
+select rodzaj, avg(waga), count(waga),
+count(*)
+from kreatura group by rodzaj;
+```
+```sql
+#3
+select 2023 - year(dataUr) as wiek from kreatura;
+```
+
+```sql
+#1
+select sum(waga*ilosc) from zasob order by rodzaj;
+```
+```sql
+#2
+select avg(waga) from zasob group by nazwa having sum(ilosc)>=4 and sum(waga*ilosc)>10;
+```
+```sql
+#3
+SELECT rodzaj, COUNT(DISTINCT nazwa) AS liczbanazw FROM zasob GROUP BY rodzaj HAVING min(liczbanazw) > 1;
+```
+
+```sql
+#1
+select k.nazwa,e.idZasobu,z.nazwa from kreatura k inner join ekwipunek e on k.idKreatury=e.idKreatury;
+```
+```sql
+#2
+select k.nazwa,e.idZasobu,z.nazwa from kreatura k inner join ekwipunek e on k.idKreatury=e.idKreatury inner join zasob z on
+z.idZasobu=e.idZasobu;
+```
+```sql
+#3
+select idKreatury from kreatura
+where idKreatury not in 
+(select distinct idKreatury from ekwipunek
+where idKreatury is not null);
+```
+#zad4
+
+```sql
+select k.nazwa, z.nazwa from kreatura k natural join ekwipunek e natural join zasob z where k.rodzaj='wiking' and year(dataur) between 1670 and 1679;
+```
+
+```sql
+select k.nazwa from kreatura k inner join ekwipunek e on k.idkreatury=e.idkreatury inner join zasob z on e.idZasobu=z.idzasobu where z.rodzaj='jedzenie' order by year(now())-year(dataur) limit 5;
+```
+
+```sql
+select concat(k1.nazwa,' - ',k2.nazwa)
+from kreatura k1
+inner join kreatura k2
+where k1.idKreatury - k2.idKreatury = 5;
 ```
 
 
