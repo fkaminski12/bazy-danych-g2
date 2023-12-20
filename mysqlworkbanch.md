@@ -1,5 +1,5 @@
 # Zadania lab04 
-# Zadanie 1
+## Zadanie 1
 
 ```sql
 Create table postac (
@@ -22,7 +22,7 @@ set wiek=88
 where id_postaci=3;
 ```
 
-# Zadanie 2
+## Zadanie 2
 ```sql
 Create table walizka(
 id_walizka int not null AUTO_INCREMENT Primary key,
@@ -33,7 +33,7 @@ Foreign key(id_wlasciciela) references postac(id_postaci) on delete cascade
 )
 ;
 ```
-# zad3
+## zad3
 ```sql
 create table izba(
 adres_budynku varchar(50) not null,
@@ -45,7 +45,7 @@ references postac(id_postaci) on delete set null
 );
 ```
 
-# zad4
+## zad4
 ```sql
 drop table izba;
 select * from izba;
@@ -60,7 +60,7 @@ select * from izba;
 alter table izba add
  primary key (adres_budynku,nazwa_izby);
 ```
-# zad 5
+## zad 5
 ```sql
 create table przetwory(
 id_przeworu int primary key ,
@@ -77,7 +77,7 @@ select * from przetwory;
 insert into przetwory values 
 (1,default,1,'bigos',default,1);
 ```
-# zad6
+## zad6
 ```sql
 insert into postac values 
 (4,'lukasz','wiking','1700-11-09',323);
