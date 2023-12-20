@@ -267,5 +267,21 @@ from kreatura k1
 inner join kreatura k2
 where k1.idKreatury - k2.idKreatury = 5;
 ```
+#lab08
+```sql
+create table kreatura as select * from wikingowie.kreatura;
+create table uczestnicy as select * from wikingowie.uczestnicy;
+create table etapy_wyprawy as select * from wikingowie.etapy_wyprawy;
+create table sektor as select * from wikingowie.sektor;
+create table wyprawa as select * from wikingowie.wyprawa;
 
+select nazwa,id_uczestnika from kreatura k  left join uczestnicy u on u.id_uczestnika=k.idKreatury where id_uczestnika is null;
+
+select w.nazwa,sum(e.ilosc) from wyprawa w inner join uczestnicy u on w.id_wyprawy=u.id_wyprawy 
+inner join ekwipunek e on u.id_uczestnika=e.idKreatury group by w.nazwa;
+select w.nazwa,count(distinct u.id_uczestnika),group_concat(k.nazwa separator ' | ') from wyprawa w 
+inner join uczestnicy u on w.id_wyprawy=u.id_wyprawy 
+inner join kreatura k on u.id_uczestnika=k.idKreatury
+group by w.nazwa;
+```
 
