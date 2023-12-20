@@ -178,7 +178,6 @@ alter table marynarz add column
 alter table postac delete id_postaci='Adrian';
 #funkcje argumentujace
 # avg, sum, count , min , max
-#zad 1 pkt 1
 
 ```
 # lab6
