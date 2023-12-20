@@ -33,7 +33,7 @@ Foreign key(id_wlasciciela) references postac(id_postaci) on delete cascade
 )
 ;
 ```
-#zad3
+# zad3
 ```sql
 create table izba(
 adres_budynku varchar(50) not null,
@@ -44,8 +44,8 @@ foreign key (wlasciciel)
 references postac(id_postaci) on delete set null
 );
 ```
-#on delete lub on update -> restrict|set null|cascade
-#zad4
+
+# zad4
 ```sql
 drop table izba;
 select * from izba;
@@ -60,7 +60,7 @@ select * from izba;
 alter table izba add
  primary key (adres_budynku,nazwa_izby);
 ```
-#zad 5
+# zad 5
 ```sql
 create table przetwory(
 id_przeworu int primary key ,
@@ -77,7 +77,7 @@ select * from przetwory;
 insert into przetwory values 
 (1,default,1,'bigos',default,1);
 ```
-#zad6
+# zad6
 ```sql
 insert into postac values 
 (4,'lukasz','wiking','1700-11-09',323);
@@ -104,7 +104,7 @@ alter table postac add column
 funkcja varchar(45);
 update postac set funkcja='kapitan' where id_postaci=1
 ```
-#lab 05
+# lab 05
 ```sql
 delete from postac
 where nazwa<>'Bjorn'
@@ -181,7 +181,7 @@ alter table postac delete id_postaci='Adrian';
 #zad 1 pkt 1
 
 ```
-#lab6
+# lab6
 ```sql
 create table infs_kaminskif.kreatura as select * from kreatura;
 create table infs_kaminskif.zasob as select * from zasob;
@@ -197,7 +197,7 @@ select * from zasob where rodzaj='jedzenie';
 select idZasobu,ilosc from ekwipunek where idkreatury in (1,3,5)
 ```
 
-#lab07
+# lab07
 ```sql
 select * from kreatura where udzwig>=50 and not rodzaj='wiedzma' or rodzaj is null and udzwig>=50; 
 ```
@@ -267,7 +267,7 @@ from kreatura k1
 inner join kreatura k2
 where k1.idKreatury - k2.idKreatury = 5;
 ```
-#lab08
+# lab08
 ```sql
 create table kreatura as select * from wikingowie.kreatura;
 create table uczestnicy as select * from wikingowie.uczestnicy;
