@@ -322,4 +322,23 @@ select nazwa_towaru,count(towar) from pozycja_zamowienia p inner join towar t on
 ```sql
 select numer_zamowienia,sum(ilosc*cena) from zamowienie z inner join pozycja_zamowienia p on z.id_zamowienia=p.zamowienie where data_zamowienia between '2017-01'and '2017-03-31'group by id_zamowienia;
 ```
+##### zad 10
+```sql
+select pr.imie , pr.nazwisko, sum(pz.ilosc*pz.cena)as suma from zamowienie z inner join pozycja_zamowienia pz on z.id_zamowienia=pz.zamowienie inner join pracownik pr on pr.id_pracownika=z.pracownik_id_pracownika group by z.pracownik_id_pracownika order by suma desc;
+```
 
+# powtórka cz.2
+```sql
+```
+##### zad 10
+```sql
+```
+##### zad 10
+```sql
+```
+##### zad 10
+```sql
+```
+##### zad 10
+```sql
+```
