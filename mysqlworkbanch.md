@@ -283,4 +283,43 @@ inner join uczestnicy u on w.id_wyprawy=u.id_wyprawy
 inner join kreatura k on u.id_uczestnika=k.idKreatury
 group by w.nazwa;
 ```
+# powtórka
+##### zad 2
+```sql
+SELECT 
+    imie,
+    nazwisko,
+    YEAR(CURDATE()) - YEAR(data_urodzenia) - (DATE_FORMAT(CURDATE(), '%m%d') < DATE_FORMAT(data_urodzenia, '%m%d')) AS Wiek
+FROM 
+    pracownik;
+```
+##### zad 3
+```sql
+
+select d.nazwa,count(p.id_pracownika) from dzial d inner join pracownik p on d.id_dzialu=p.dzial group by d.nazwa;
+```
+##### zad 4
+```sql
+select k.nazwa_kategori,count(t.id_towaru) from kategoria k inner join towar t on k.id_kategori=t.kategoria group by k.nazwa_kategori;
+```
+##### zad 5
+```sql
+select k. nazwa_kategori ,group_concat(t.nazwa_towaru) from kategoria k inner join towar t on k.id_kategori=t.kategoria group by k.nazwa_kategori;
+```
+##### zad 6
+```sql
+select round(avg(pensja),2) from pracownik;
+```
+##### zad 7
+```sql
+select round(avg(pensja),2) from pracownik where (year(now())-year(data_zatrudnienia))>5;
+```
+##### zad 8
+```sql
+select nazwa_towaru,count(towar) from pozycja_zamowienia p inner join towar t on p.towar=t.id_towaru group by nazwa_towaru order by count(towar) desc limit 10;
+```
+##### zad 9
+```sql
+select numer_zamowienia,sum(ilosc*cena) from zamowienie z inner join pozycja_zamowienia p on z.id_zamowienia=p.zamowienie where data_zamowienia between '2017-01'and '2017-03-31'group by id_zamowienia;
+```
 
